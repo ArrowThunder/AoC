@@ -102,8 +102,8 @@ def main():
         for entry in file:
             xy1, xy2 = parse_line(entry)
             new_seg = lineseg(xy1, xy2)
-            if new_seg.slope != float('inf') and new_seg.slope != 0.0:
-                continue
+            # if new_seg.slope != float('inf') and new_seg.slope != 0.0:
+                # continue
             for seg in lines:
                 intersect = seg.intersect(new_seg)
                 if intersect == None:
