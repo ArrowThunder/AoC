@@ -1,19 +1,32 @@
 class board:
-    nums = {}
-    tries = -1
-    winningNum = -1
-    def copy(self):
-        toReturn = board()
-        toReturn.nums = self.nums.copy()
-        toReturn.tries = self.tries
-        toReturn.winningNum = self.winningNum
-        return toReturn
-    def destroy(self):
-        self.nums.clear()
-        self.tries = -1
-        winningNum = -1
+    nums, tries, winning_num = None, None, None
+    def __init__(self):
+        self.nums = dict()
+    
+    def play(self, numbers):
+        cols = [0,0,0,0,0]
+        rows = [0,0,0,0,0]
+        for j in range(len(numbers)):
+            n = int(numbers[j])
+            if n in self.nums:
+                pos = self.nums[n]
+                self.nums.pop(n)
+                cols[pos[0]] += 1
+                rows[pos[1]] += 1
+                if 5 in cols or 5 in rows:
+                    self.tries = j
+                    self.winning_num = n
+                    break
+    
+    def score(self):
+        score = 0
+        for n in self.nums.keys():
+            score += n
+        print(score)
+        print(self.winning_num)
+        return(score * self.winning_num)
 
-minboard = board()
+minboard = None
 with open("input.txt") as file:
     numbers = file.readline().split(',')
     lines = file.readlines()
@@ -25,26 +38,7 @@ with open("input.txt") as file:
             spaces = lines[6*i + y].split()
             for x in range(5):
                 b.nums[int(spaces[x])] = (x,y)
-        cols = [0,0,0,0,0]
-        rows = [0,0,0,0,0]
-        for j in range(len(numbers)):
-            n = int(numbers[j])
-            if n in b.nums:
-                pos = b.nums[n]
-                b.nums.pop(n)
-                cols[pos[0]] += 1
-                rows[pos[1]] += 1
-                if 5 in cols or 5 in rows:
-                    #winner
-                    b.tries = float(j)
-                    b.winningNum = n
-                    break
-        if b.tries > minboard.tries:
-            minboard = b.copy()
-        b.destroy()
-score = 0
-for n in minboard.nums.keys():
-    score += n
-print(score)
-print(minboard.winningNum)
-print(score * minboard.winningNum)
+        b.play(numbers)
+        if minboard == None or b.tries > minboard.tries:
+            minboard = b
+print(minboard.score())
