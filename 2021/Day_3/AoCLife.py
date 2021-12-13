@@ -37,12 +37,12 @@ with open('input.txt') as file:
     oxygen = parser(lines, 0)
     CO2 = parser(lines, 0, False)
 
-oxyRating = 0
-scrubRating = 0
+oxy_rating = 0
+scrub_rating = 0
 
 for i in range(digits):
-    oxyRating += int(oxygen[i]) * 2**(digits-i-1)
-    scrubRating += int(CO2[i]) * 2**(digits-i-1)
-print(oxyRating)
-print(scrubRating)
-print(oxyRating * scrubRating)
+    oxy_rating += int(oxygen[i]) * 2**(digits-i-1)
+    scrub_rating += int(CO2[i]) * 2**(digits-i-1)
+print(oxy_rating)
+print(scrub_rating)
+print(oxy_rating * scrub_rating)
