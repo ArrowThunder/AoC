@@ -41,7 +41,7 @@ def decode_line(inputs, outputs):
     output = ''
     for code in outputs:
         output += seg_decode(code, c, e, f)
-    print(output)
+    # print(output)
     return int(output)
 
 # decipher a code based on its length and the c, e, and f segments
