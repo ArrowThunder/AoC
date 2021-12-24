@@ -1,33 +1,12 @@
 # determining the probability of different outcomes
-# probs = dict()
-# for key in range(3,10):
-    # probs[key] = 0
+dirac_die = dict()
+for key in range(3,10): # min of 3d3 is 3, max of 3d3 is 9
+    dirac_die[key] = 0
 
-# for i in range(1,4):
-    # for j in range(1,4):
-        # for k in range(1,4):
-            # probs[i + j + k] += 1
-# for item in probs.items():
-    # print(item)
-    
-# output:
-# (3, 1)
-# (4, 3)
-# (5, 6)
-# (6, 7)
-# (7, 6)
-# (8, 3)
-# (9, 1)
-
-dirac_die = {
-    3:1,
-    4:3,
-    5:6,
-    6:7,
-    7:6,
-    8:3,
-    9:1
-}
+for i in range(1,4):
+    for j in range(1,4):
+        for k in range(1,4):
+            dirac_die[i + j + k] += 1
 
 def move(player, dist):
     player += dist
